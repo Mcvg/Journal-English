@@ -4,4 +4,5 @@ const activityController = require('../controllers/activity');
 
 router.get('/', activityController.getActivityList);
 
+
 module.exports = router;
