@@ -28,10 +28,15 @@ exports.getUser = (req, res, next) => {
   }
 };
 
-exports.createUser = (req, res, next) => {
+exports.createUser = async (req, res, next) => {
   validateParams(req);
-
   const { first_name, last_name, email, password, active } = req.body;
+  const userExists = await User.findOne({ email }).exec();
+
+  if (userExists) {
+    res.send(`This user with the email: ${email}, already exists.`);
+  }
+
   let user = new User({
     first_name,
     last_name,
@@ -48,17 +53,21 @@ exports.createUser = (req, res, next) => {
 };
 
 exports.updateUser = (req, res, next) => {
-  User.findByIdAndUpdate(req.body.id, req.body.data, function (err) {
+  User.findOneAndUpdate(req.body.id, req.body.data, function (err) {
     if (err) return err;
     res.send('User updated successfully.');
   });
 };
 
 exports.deactivateUser = (req, res, next) => {
-  User.findByIdAndUpdate(req.body.id, req.body.active, function (err) {
-    if (err) return err;
-    res.send('User deactivated successfully.');
-  });
+  User.findOneAndUpdate(
+    req.body.id,
+    { active: req.body.active },
+    function (err) {
+      if (err) return err;
+      res.send('User deactivated successfully.');
+    }
+  );
 };
 
 const validateParams = (req) => {
