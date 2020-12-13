@@ -1,6 +1,8 @@
 const { validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
 const { validatorError, serverError } = require('../utils/errors');
 
+// Model DB
 const User = require('../models/user');
 
 exports.getUserList = (req, res, next) => {
@@ -30,7 +32,8 @@ exports.getUser = (req, res, next) => {
 
 exports.createUser = async (req, res, next) => {
   validateParams(req);
-  const { first_name, last_name, email, password, active } = req.body;
+  const hashedPassword = bcrypt.hashSync(req.body.password, 8);
+  const { first_name, last_name, email, active } = req.body;
   const userExists = await User.findOne({ email }).exec();
 
   if (userExists) {
@@ -41,7 +44,7 @@ exports.createUser = async (req, res, next) => {
     first_name,
     last_name,
     email,
-    password,
+    password: hashedPassword,
     active,
   });
 
