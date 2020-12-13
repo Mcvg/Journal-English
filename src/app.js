@@ -15,7 +15,8 @@ app.use('/activity', activityRoutes);
 app.use('/user', userRoutes);
 
 // Database configuration
-let dev_db_url = 'mongodb://kath:kath123@ds263917.mlab.com:63917/rummy';
+let dev_db_url =
+  'mongodb+srv://kath:kath123@clusterkath.ovwkv.mongodb.net/andromeda-journal?retryWrites=true&w=majority';
 
 // Connect to mongodb
 let mongoDB = process.env.MONGODB_URI || dev_db_url;
