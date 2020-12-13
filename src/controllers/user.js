@@ -46,11 +46,11 @@ exports.createUser = (req, res, next) => {
     sendSuccessfullyResponse(res, 'User created successfully.');
   });
 };
-// Instead of delete, update the property 'active' false
-exports.deactivateUser = (req, res, next) => {
-  User.findByIdAndDelete(req.params.id, function (err) {
+
+exports.updateUser = (req, res, next) => {
+  User.findByIdAndUpdate(req.params.id, req.body, function (err) {
     if (err) return err;
-    res.send('User removed successfully.');
+    res.send('User updated successfully.');
   });
 };
 

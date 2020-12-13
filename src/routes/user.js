@@ -17,6 +17,7 @@ const validationsCreate = [
 router.get('/', userController.getUserList);
 router.get('/detail', userController.getUser);
 router.post('/create', validationsCreate, userController.createUser);
-router.delete('/:id/deactivate', userController.deactivateUser);
+router.patch('/:id/update', userController.updateUser);
+router.delete('/:id/deactivate', userController.updateUser);
 
 module.exports = router;
