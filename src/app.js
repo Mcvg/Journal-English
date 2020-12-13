@@ -1,9 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const activityRoutes = require('./routes/activity');
-const userRoutes = require('./routes/user');
 const mongoose = require('mongoose');
 
+const activityRoutes = require('./routes/activity');
+const userRoutes = require('./routes/user');
+const authRoutes = require('./routes/auth');
 const app = express();
 
 // Config
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 app.use('/activity', activityRoutes);
 app.use('/user', userRoutes);
+app.use('/auth', authRoutes);
 
 // Database configuration
 let dev_db_url =
