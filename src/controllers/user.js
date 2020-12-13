@@ -48,9 +48,16 @@ exports.createUser = (req, res, next) => {
 };
 
 exports.updateUser = (req, res, next) => {
-  User.findByIdAndUpdate(req.params.id, req.body, function (err) {
+  User.findByIdAndUpdate(req.body.id, req.body.data, function (err) {
     if (err) return err;
     res.send('User updated successfully.');
+  });
+};
+
+exports.deactivateUser = (req, res, next) => {
+  User.findByIdAndUpdate(req.body.id, req.body.active, function (err) {
+    if (err) return err;
+    res.send('User deactivated successfully.');
   });
 };
 
