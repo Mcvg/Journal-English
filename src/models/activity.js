@@ -7,18 +7,15 @@ const ActivitySchema = new Schema({
     required: true,
     max: 25,
   },
-  id_user: {
-    type: { type: Schema.Types.ObjectId, ref: 'User' },
-  },
+  id_user:{ type: Schema.Types.ObjectId, ref: 'User' },
   detail_text: {
     type: String,
     required: true,
     max: 250,
   },
   detail_audio: {
-    type: String,
-    required: true,
-    max: 200,
+    type: Buffer,
+    required: true
   },
 });
 

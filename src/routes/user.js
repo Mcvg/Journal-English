@@ -1,9 +1,8 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-
 const router = express.Router();
+
 const userController = require('../controllers/user');
-const { authentication } = require('../middleware/auth');
+
 // Validations
 const { name } = require('../validations/general');
 const { email, password } = require('../validations/user');
@@ -15,18 +14,10 @@ const validationsCreate = [
   password('password'),
 ];
 
-router.use(bodyParser.urlencoded({ extended: false }));
-router.use(bodyParser.json());
-
-router.get('/', authentication, userController.getUserList);
-router.get('/detail', authentication, userController.getUser);
-router.post(
-  '/create',
-  authentication,
-  validationsCreate,
-  userController.createUser
-);
-router.post('/update', authentication, userController.updateUser);
-router.post('/deactivate', authentication, userController.deactivateUser);
+router.get('/', userController.getUserList);
+router.get('/detail', userController.getUser);
+router.post('/create', validationsCreate, userController.createUser);
+router.post('/update', userController.updateUser);
+router.post('/deactivate', userController.deactivateUser);
 
 module.exports = router;

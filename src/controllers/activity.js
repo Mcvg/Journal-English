@@ -41,19 +41,60 @@ exports.createActivity = (req, res, next) => {
     detail_audio: req.body.detail_audio
   });
 
+ // validateAudio();
   activity.save(function (err) {
     if (err) console.log(err);
 
     sendSuccessfullyResponse(res, 'Activity created successfully.');
   });
 };
-
+/*function validateAudio(){
+  const FileType = require('file-type');
+  const FS = require('fs')
+(async () => {
+    console.log(await FS.readFile('editar.png'));
+    if ((await FileType.fromFile('editar.png')).ext != "mp3"){
+      res.send('the file extension is wrong.');
+    }
+})();
+}*/
 exports.deactivateActivity = (req, res, next) => {
   User.findByIdAndDelete(req.params.id, function (err) {
     if (err) return err;
     res.send('Activity removed successfully.');
   });
 };
+
+
+exports.updateActivity= (req, res, next) => {
+  Activity.findOneAndUpdate(req.body.id, req.body.data, function (err) {
+    if (err) return err;
+    res.send('Activity updated successfully.');
+  });
+  
+  console.log(req.params);
+  /*const activities = Activity.findAll({
+    attributes: ['id', 'name', 'id_user', 'detail_text', 'detail_audio'],
+    where:{
+      id
+    }
+  });
+  if(activities.length > 0){
+    activities.forEach(activity =>{
+      activity.update({
+        name,
+        id_user,
+        detail_text,
+        detail_audio
+      })
+    })
+  }
+  return res.json({
+    message:'Activity Updated succesfully',
+    data: activities
+  })*/
+}
+
 
 const validateParams = (req) => {
   const errorList = validationResult(req);
