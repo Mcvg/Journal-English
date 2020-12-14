@@ -1,11 +1,14 @@
 const jwt = require('jsonwebtoken');
-
 // Model DB
 const User = require('../models/user');
 
 exports.getNewToken = async (req, res, next) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email, password }).exec();
+
+  if (!user) {
+    res.status(401).send('Authentication failed');
+  }
 
   if (user) {
     const token = jwt.sign({ id: user.id }, process.env['API_KEY'], {
