@@ -33,7 +33,7 @@ exports.getUser = (req, res, next) => {
 exports.createUser = async (req, res, next) => {
   validateParams(req);
   const hashedPassword = bcrypt.hashSync(req.body.password, 8);
-  const { first_name, last_name, email, active } = req.body;
+  const { first_name, last_name, email, active, role } = req.body;
   const userExists = await User.findOne({ email }).exec();
 
   if (userExists) {
@@ -46,6 +46,7 @@ exports.createUser = async (req, res, next) => {
     email,
     password: hashedPassword,
     active,
+    role,
   });
 
   user.save(function (err) {
