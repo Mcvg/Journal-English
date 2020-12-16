@@ -64,7 +64,7 @@ function validateAudio(nameFile) {
   });
 }
 exports.deactivateActivity = (req, res, next) => {
-  User.findByIdAndDelete(req.params.id, function (err) {
+  Activity.findByIdAndDelete(req.params.id, function (err) {
     if (err) return err;
     res.send('Activity removed successfully.');
   });

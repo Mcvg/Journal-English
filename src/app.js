@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const activityRoutes = require('./routes/activity');
 const userRoutes = require('./routes/user');
 const authRoutes = require('./routes/auth');
+const commentaryRoutes = require('./routes/commentary');
 const app = express();
 
 // Config
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/activity', activityRoutes);
 app.use('/user', userRoutes);
 app.use('/auth', authRoutes);
+app.use('/commentary', commentaryRoutes);
 
 // Database configuration
 let dev_db_url =
