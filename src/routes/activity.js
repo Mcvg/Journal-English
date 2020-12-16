@@ -18,10 +18,10 @@ const validationsCreate = [
   detail_audio('detail_audio'),
 ];
 
-router.get('/',  activityController.getActivityList);
-router.get('/:id', activityController.getActivity);
-router.post('/create',   validationsCreate, activityController.createActivity);
-router.post('/update/:id', activityController.updateActivity);
+router.get('/', authentication, activityController.getActivityList);
+router.get('/:id', authentication, activityController.getActivity);
+router.post('/create', authentication,  validationsCreate, activityController.createActivity);
+router.post('/update/:id', authentication,  activityController.updateActivity);
 router.delete('/:id/deactivate', authentication, activityController.deactivateActivity);
 
 module.exports = router;
