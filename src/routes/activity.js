@@ -19,9 +19,9 @@ const validationsCreate = [
 ];
 
 router.get('/',  activityController.getActivityList);
-router.get('/:id', authentication, activityController.getActivity);
+router.get('/:id', activityController.getActivity);
 router.post('/create',   validationsCreate, activityController.createActivity);
-router.post('/update', validationsCreate,  activityController.updateActivity);
+router.post('/update/:id', activityController.updateActivity);
 router.delete('/:id/deactivate', authentication, activityController.deactivateActivity);
 
 module.exports = router;
