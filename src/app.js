@@ -17,8 +17,7 @@ app.use('/user', userRoutes);
 app.use('/auth', authRoutes);
 
 // Database configuration
-let dev_db_url =
-  'mongodb+srv://kath:kath123@clusterkath.ovwkv.mongodb.net/andromeda-journal?retryWrites=true&w=majority';
+let dev_db_url = process.env['MONGO_KEY'];
 
 // Connect to mongodb
 let mongoDB = process.env.MONGODB_URI || dev_db_url;
